@@ -12,7 +12,7 @@ export default function Navbar() {
             <div className="text-sm lg:text-lg text-gray-600 font-normal">
                 <ul className="flex items-center gap-5">
                     <li className="hover:text-gray-700 hover:font-medium"><a href="#about">About</a></li>
-                    <li className="hover:text-gray-700 hover:font-medium"><a href="#">Features</a></li>
+                    <li className="hover:text-gray-700 hover:font-medium"><a href="#features">Features</a></li>
                     <li className="hover:text-gray-700 hover:font-medium"><a href="#">How it Works</a></li>
                 </ul>
             </div>

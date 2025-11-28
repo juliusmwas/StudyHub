@@ -59,7 +59,7 @@ export default function HeroSection() {
                             visible: { opacity: 1, y: 0 }
                         }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 w-full sm:w-auto"
+                        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 w-full sm:w-auto"
                         >
                         Register Now
                         </motion.button>
