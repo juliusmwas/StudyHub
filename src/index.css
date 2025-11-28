@@ -1,4 +1,6 @@
 @import "tailwindcss";
+
 body{
     background-color: #F7F9FB;
+    scroll-behavior: smooth;
 }

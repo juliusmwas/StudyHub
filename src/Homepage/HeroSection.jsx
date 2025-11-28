@@ -6,10 +6,10 @@ export default function HeroSection() {
         <>
             <section id="home">
             {/* Outer padding to create space around the background image */}
-            <div className="w-full px-4 mt-10 sm:px-8 md:px-12">
+            <div className="w-full px-4 h-screen mt-10 sm:px-8 md:px-12">
                 
                 {/* Background container */}
-                <div className="relative w-full py-28 sm:py-36 md:py-44 min-h-[600px] flex items-center bg-[url('/bg6.jpg')] bg-cover bg-center rounded-2xl overflow-hidden shadow-xl">
+                <div className="relative w-full py-28 sm:py-36 md:py-44 min-h-[600px] lg:h-screen flex items-center bg-[url('/bg6.jpg')] bg-cover bg-center rounded-2xl overflow-hidden shadow-xl">
 
                 {/* Dark overlay for text contrast */}
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/60 to-transparent"></div>
@@ -17,7 +17,7 @@ export default function HeroSection() {
                 {/* Text container */}
                 <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start h-full text-center md:text-left mx-auto max-w-7xl w-full px-4">
                     
-                    <div className="w-full md:w-1/2 lg:w-4/5 flex flex-col items-center md:items-start">
+                    <div className="w-full md:w-1/2 lg:w-4/5 flex flex-col lg:mt-30 items-center md:items-start">
 
                     {/* Heading */}
                     <motion.h1
@@ -34,7 +34,7 @@ export default function HeroSection() {
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
-                        className="text-lg sm:text-xl text-gray-200 mb-10 font-light"
+                        className="text-lg sm:text-xl text-gray-200 mb-10 font-normal"
                     >
                         Join live study rooms, access course materials, and collaborate with peers all in one easy-to-use platform designed to help you succeed.
                     </motion.p>
