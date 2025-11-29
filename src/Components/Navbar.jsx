@@ -13,7 +13,8 @@ export default function Navbar() {
                 <ul className="flex items-center gap-5">
                     <li className="hover:text-gray-700 hover:font-medium"><a href="#about">About</a></li>
                     <li className="hover:text-gray-700 hover:font-medium"><a href="#features">Features</a></li>
-                    <li className="hover:text-gray-700 hover:font-medium"><a href="#">How it Works</a></li>
+                    <li className="hover:text-gray-700 hover:font-medium"><a href="#howitworks">How it Works</a></li>
+                    <li className="hover:text-gray-700 hover:font-medium"><a href="#">Testimonials</a></li>
                 </ul>
             </div>
             

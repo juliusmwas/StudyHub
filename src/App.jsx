@@ -1,19 +1,12 @@
 import './index.css'
-import Navbar from './Components/Navbar'
-import HeroSection from './Homepage/HeroSection'
-import AboutSection from './Homepage/AboutSection'
-import FeaturesSection from './Homepage/FeaturesSection'
-import HowItWorksSection from './Homepage/HowItWorksSection'
+import Homepage from "./Pages/Homepage";
+
 
 function App() {
 
   return (
     <>
-      <Navbar />
-      <HeroSection />
-      <AboutSection />
-      <FeaturesSection />
-      <HowItWorksSection />
+      <Homepage />
     </>
   )
 }
