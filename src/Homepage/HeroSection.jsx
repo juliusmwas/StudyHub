@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function HeroSection() {
     return(
-        <>
+        
             <section id="home">
             {/* Outer padding to create space around the background image */}
             <div className="w-full px-4 h-screen mt-10 sm:px-8 md:px-12">
@@ -82,6 +82,6 @@ export default function HeroSection() {
             </div>
             </section>
 
-        </>
+        
     );
 }

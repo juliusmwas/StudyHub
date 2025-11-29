@@ -7,7 +7,7 @@ import { IoLibraryOutline } from "react-icons/io5";
 
 export default function FeaturesSection() {
     return(
-        <>
+        
             <section id="features"> 
                 <div className="w-full px-6 py-20 lg:py-28 max-w-[1200px] mx-auto">
   <div className="text-center mb-14">
@@ -51,6 +51,6 @@ export default function FeaturesSection() {
 </div>
 
             </section>
-        </>
+        
     );
 }

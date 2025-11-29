@@ -2,7 +2,7 @@
 
 export default function AboutSection() {
     return(
-        <>
+        
         <section id="about">
             <div className="w-full px-6 py-20 lg:py-28 max-w-[1200px] mx-auto">
     <div className="text-center mb-16">
@@ -47,7 +47,7 @@ export default function AboutSection() {
 
 
         </section>
-        </>
+        
     );
 
 }
