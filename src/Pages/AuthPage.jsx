@@ -177,7 +177,7 @@ const RegisterForm = ({ role, switchToLogin, handleRegister }) => {
             {isTutor && (
                 <FormInput
                     id="reg-phone"
-                    label="Phone Number (Optional)"
+                    label="Phone Number"
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}

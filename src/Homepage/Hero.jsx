@@ -1,6 +1,19 @@
 
+import { useNavigate } from 'react-router-dom';
+
 
 export default function HeroSection() {
+
+const navigate = useNavigate();
+
+    const handleRegisterClick = () => {
+        // Redirect to the /auth page
+        // We can pass state to the AuthPage to default to the 'register' view
+        navigate('/auth', { state: { tab: 'register' } }); 
+    };
+
+
+    
     return(
         
             <section id="home">
@@ -30,13 +43,20 @@ export default function HeroSection() {
 
                     {/* Buttons */}
                     <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:justify-start">
-                        <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 w-full sm:w-auto">
+                        <button 
+                            onClick={handleRegisterClick}
+                        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 w-full sm:w-auto">
                         Register Now
                         </button>
 
+                        <a 
+                            href="#howitworks" // 👈 Set the hash link here
+                            className="w-full sm:w-auto inline-block" // 👈 Wrap to manage button width
+                        >
                         <button className="border-2 border-white hover:bg-white/10 text-white font-medium py-3 px-8 rounded-lg transition duration-300 w-full sm:w-auto">
                         Learn How It Works
                         </button>
+                        </a>
                     </div>
 
                     </div>

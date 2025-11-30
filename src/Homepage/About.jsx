@@ -1,4 +1,5 @@
-import React from 'react';
+
+import { useNavigate } from 'react-router-dom';
 import { HiCheckCircle } from "react-icons/hi"; // Using a checkmark icon for visual appeal
 
 export default function AboutSection() {
@@ -8,6 +9,14 @@ export default function AboutSection() {
         "Collaborative note-taking and resource sharing.",
         "Real-time progress tracking and task management.",
     ];
+
+    const navigate = useNavigate();
+
+    const handleRegisterClick = () => {
+        // Redirect to the /auth page
+        // We can pass state to the AuthPage to default to the 'register' view
+        navigate('/auth', { state: { tab: 'register' } }); 
+    };
 
     return(
         
@@ -47,7 +56,9 @@ export default function AboutSection() {
                         </ul>
                         
                         <div className="flex flex-col lg:block">
-                            <button className="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3 rounded-lg shadow-md transition">
+                            <button 
+                                 onClick={handleRegisterClick}
+                            className="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3 rounded-lg shadow-md transition">
                                 Get Started
                             </button>
                         </div>

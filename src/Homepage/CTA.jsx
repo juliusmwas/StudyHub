@@ -1,6 +1,16 @@
-import React from 'react';
+
+import { useNavigate } from 'react-router-dom';
 
 export default function CTA() {
+
+  const navigate = useNavigate();
+
+    const handleRegisterClick = () => {
+        // Redirect to the /auth page
+        // We can pass state to the AuthPage to default to the 'register' view
+        navigate('/auth', { state: { tab: 'register' } }); 
+    };
+
     return(
         // The main section can use a simple fade-in
         <section id="cta" className="py-20 sm:py-24 bg-indigo-700" data-aos="fade-in"> 
@@ -44,13 +54,13 @@ export default function CTA() {
                             data-aos-delay="400"
                         >
                             {/* Primary Button */}
-                            <a 
-                                href="#get-started" 
+                            <button 
+                                 onClick={handleRegisterClick}
                                 // Ensured primary color is indigo for consistency (was blue-600)
                                 className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 w-full sm:w-auto"
                             >
                                 Get Started — It’s Free
-                            </a>
+                            </button>
                         </div>
                     </div>
                     
