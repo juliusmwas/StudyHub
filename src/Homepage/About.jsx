@@ -11,7 +11,7 @@ export default function AboutSection() {
 
     return(
         
-        <section id="about">
+        <section id="about" data-aos="fade-up">
             <div className="w-full px-6 py-20 lg:py-28 max-w-[1200px] mx-auto">
                 <div className="text-center mb-16">
                     <h1 className="text-3xl md:text-5xl font-bold text-gray-900">
@@ -24,7 +24,7 @@ export default function AboutSection() {
                 <div className="flex flex-col-reverse md:flex-row items-start gap-14"> 
 
                     {/* Text Section */}
-                    <div className="w-full lg:mt-10 md:w-1/2">
+                    <div className="w-full lg:mt-10 md:w-1/2" data-aos="fade-right">
                         <p className="text-lg sm:text-xl text-gray-700 leading-relaxed mb-6">
                             Study<span className="text-indigo-600 font-semibold">Hub</span> is a platform that helps
                             students learn together smarter. Join live study sessions, share resources, and stay
@@ -55,7 +55,7 @@ export default function AboutSection() {
                     </div>
 
                     {/* Image Section */}
-                    <div className="w-full lg:mt-10 md:w-1/2 flex justify-center">
+                    <div className="w-full lg:mt-10 md:w-1/2 flex justify-center" data-aos="fade-left">
                         <img
                             src="/about4.jpg"
                             alt="Students learning together"

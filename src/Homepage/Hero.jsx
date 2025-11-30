@@ -14,7 +14,7 @@ export default function HeroSection() {
                 <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent"></div>
 
                 {/* Text container */}
-                <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start h-full text-center md:text-left mx-auto max-w-7xl w-full px-4 lg:px-15">
+                <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start h-full text-center md:text-left mx-auto max-w-7xl w-full px-4 lg:px-15" data-aos="fade-right">
                     
                     <div className="w-full md:w-1/2 lg:w-4/5 flex flex-col lg:mt-30 items-center md:items-start">
 
