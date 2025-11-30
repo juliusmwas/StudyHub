@@ -62,9 +62,7 @@ export default function Navbar() {
                         <button className="border border-gray-300 py-2 px-4 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 transition duration-150">
                             Login
                         </button>
-                        <a 
-                           href="#register"
-                           className="text-white bg-indigo-600 border border-indigo-600 py-2 px-4 rounded-lg text-base font-bold cursor-pointer hover:bg-indigo-700 transition duration-150"
+                        <a href="#register" className="text-white bg-indigo-600 border border-indigo-600 py-2 px-4 rounded-lg text-base font-bold cursor-pointer hover:bg-indigo-700 transition duration-150"
                         >
                             Register
                         </a>

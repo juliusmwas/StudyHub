@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 
 
 export default function HeroSection() {
@@ -20,61 +19,25 @@ export default function HeroSection() {
                     <div className="w-full md:w-1/2 lg:w-4/5 flex flex-col lg:mt-30 items-center md:items-start">
 
                     {/* Heading */}
-                    <motion.h1
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.2, ease: "easeOut" }}
-                        className="text-2xl  md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight"
-                    >
+                    <h1 className="text-2xl  md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
                         Collaborate, Learn, and Achieve Anytime, Anywhere
-                    </motion.h1>
+                    </h1>
 
                     {/* Paragraph */}
-                    <motion.p
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
-                        className="text-sm sm:text-xl text-white mb-10 font-normal"
-                    >
+                    <p className="text-sm sm:text-xl text-white mb-10  font-normal">
                         Join live study rooms, access course materials, and collaborate with peers all in one easy-to-use platform designed to help you succeed.
-                    </motion.p>
+                    </p>
 
                     {/* Buttons */}
-                    <motion.div
-                        initial="hidden"
-                        animate="visible"
-                        variants={{
-                        hidden: {},
-                        visible: {
-                            transition: {
-                            staggerChildren: 0.25
-                            }
-                        }
-                        }}
-                        className="flex flex-col sm:flex-row items-center gap-4 w-full md:justify-start"
-                    >
-                        <motion.button
-                        variants={{
-                            hidden: { opacity: 0, y: 20 },
-                            visible: { opacity: 1, y: 0 }
-                        }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 w-full sm:w-auto"
-                        >
+                    <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:justify-start">
+                        <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 w-full sm:w-auto">
                         Register Now
-                        </motion.button>
+                        </button>
 
-                        <motion.button
-                        variants={{
-                            hidden: { opacity: 0, y: 20 },
-                            visible: { opacity: 1, y: 0 }
-                        }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="border-2 border-white hover:bg-white/10 text-white font-medium py-3 px-8 rounded-lg transition duration-300 w-full sm:w-auto"
-                        >
+                        <button className="border-2 border-white hover:bg-white/10 text-white font-medium py-3 px-8 rounded-lg transition duration-300 w-full sm:w-auto">
                         Learn How It Works
-                        </motion.button>
-                    </motion.div>
+                        </button>
+                    </div>
 
                     </div>
                 </div>
