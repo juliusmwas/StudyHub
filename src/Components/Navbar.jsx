@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
-import { HiMenu, HiX } from "react-icons/hi"; // Import HiX for the close icon
+import { HiMenu, HiX } from "react-icons/hi"; 
+import { useNavigate } from "react-router-dom"; // 👈 1. IMPORT NAVIGATE
 
-export default function Navbar() {
+// Removed: The component no longer accepts the onShowAuth prop
+export default function Navbar() { 
+
+    // 2. INITIALIZE NAVIGATE
+    const navigate = useNavigate();
+
     // 1. State to manage the visibility of the mobile menu
     const [isOpen, setIsOpen] = useState(false);
 
@@ -11,12 +17,21 @@ export default function Navbar() {
         { name: "Features", href: "#features" },
         { name: "How it Works", href: "#howitworks" },
         { name: "Testimonials", href: "#testimonials" },
-        // Add CTA/Pricing if you have them
     ];
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+
+    // 3. REPLACED: Helper function to redirect to the AuthPage
+    const handleAuthClick = (tab = 'login') => {
+        // Use navigate to go to the /auth route
+        navigate("/auth", { state: { tab: tab } });
+        
+        if (isOpen) {
+            setIsOpen(false);
+        }
+    }
 
     // Reusable Nav Link List component for both desktop and mobile
     const NavLinkList = ({ isMobile = false }) => (
@@ -24,7 +39,7 @@ export default function Navbar() {
             {navLinks.map((link) => (
                 <li 
                     key={link.name} 
-                    className="hover:text-blue-700 transition duration-150"
+                    className="hover:text-indigo-600 transition duration-150"
                 >
                     <a 
                         href={link.href}
@@ -57,15 +72,21 @@ export default function Navbar() {
                         <NavLinkList />
                     </nav>
                     
-                    {/* Desktop Auth Buttons (Hidden on Mobile) */}
+                    {/* Desktop Auth Buttons (MODIFIED to pass tab type) */}
                     <div className="hidden lg:flex items-center gap-3">
-                        <button className="border border-gray-300 py-2 px-4 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 transition duration-150">
+                        <button
+                            onClick={() => handleAuthClick('login')} // 👈 Call with 'login'
+                            className="border border-gray-300 py-2 px-4 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 transition duration-150"
+                        >
                             Login
                         </button>
-                        <a href="#register" className="text-white bg-indigo-600 border border-indigo-600 py-2 px-4 rounded-lg text-base font-bold cursor-pointer hover:bg-indigo-700 transition duration-150"
+
+                        <button
+                            onClick={() => handleAuthClick('register')} // 👈 Call with 'register'
+                            className="text-white bg-indigo-600 border border-indigo-600 py-2 px-4 rounded-lg text-base font-bold cursor-pointer hover:bg-indigo-700 transition duration-150"
                         >
                             Register
-                        </a>
+                        </button>
                     </div>
 
                     {/* Mobile Menu Icon (Hamburger/Close) */}
@@ -87,18 +108,20 @@ export default function Navbar() {
                         <NavLinkList isMobile={true} />
                     </nav>
 
-                    {/* Mobile Auth Buttons */}
+                    {/* Mobile Auth Buttons (MODIFIED to pass tab type) */}
                     <div className="flex flex-col gap-3 pt-4 border-t border-gray-100">
-                        <button className="w-full border border-gray-300 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 transition duration-150">
+                        <button 
+                            onClick={() => handleAuthClick('login')} // 👈 Call with 'login'
+                            className="w-full border border-gray-300 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 transition duration-150"
+                        >
                             Login
                         </button>
-                        <a 
-                            href="#register"
-                            onClick={toggleMenu} // Close after clicking Register
+                        <button 
+                            onClick={() => handleAuthClick('register')} // 👈 Call with 'register'
                             className="w-full text-center text-white bg-indigo-600 border border-indigo-600 py-2 rounded-lg text-base font-bold cursor-pointer hover:bg-indigo-700 transition duration-150"
                         >
                             Register
-                        </a>
+                        </button>
                     </div>
                 </div>
             )}
