@@ -76,7 +76,7 @@ export default function Testimonials() {
                         </p>
                         
                         {/* CTA Button */}
-                        <button className="mt-8 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition duration-300">
+                        <button className="mt-8 px-6 py-3 bg-gradient-to-r from-blue-600 to-pink-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition duration-300">
                             View More Success Stories
                         </button>
                     </div>
