@@ -5,6 +5,7 @@ import Features from "../Homepage/Features";
 import HowItWorks from "../Homepage/HowItWorks";
 import Testimonials from "../Homepage/Testimonials";
 import CTA from "../Homepage/CTA";
+import Footer from "../Components/Footer";
 
 
 export default function Homepage() {
@@ -17,6 +18,7 @@ export default function Homepage() {
       <HowItWorks />
       <Testimonials />
       <CTA />
+      <Footer />
     </>
   );
 }
