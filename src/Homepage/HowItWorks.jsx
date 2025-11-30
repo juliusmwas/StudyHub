@@ -30,7 +30,7 @@ export default function HowItWorksSection() {
 
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+          <h2 className="text-4xl font-bold text-gray-900 sm:text-5xl">
             Let's See How It Works
           </h2>
           {/* Micro-copy Tip */}
@@ -46,7 +46,7 @@ export default function HowItWorksSection() {
           <div className="w-full lg:w-3/3 mb-10 lg:mb-0">
             <div className="rounded-2xl shadow-xl overflow-hidden transform transition duration-500 hover:scale-[1.02]">
 
-              <div className="bg-cover bg-center h-150 min-h-60">
+              <div className="bg-cover bg-center lg:h-150 min-h-60">
                 <img src="/how2.jpg" alt="" />
               </div>
             </div>

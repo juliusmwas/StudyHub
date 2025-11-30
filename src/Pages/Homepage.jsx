@@ -4,6 +4,8 @@ import About from "../Homepage/About";
 import Features from "../Homepage/Features";
 import HowItWorks from "../Homepage/HowItWorks";
 import Testimonials from "../Homepage/Testimonials";
+import CTA from "../Homepage/CTA";
+
 
 export default function Homepage() {
   return (
@@ -14,6 +16,7 @@ export default function Homepage() {
       <Features />
       <HowItWorks />
       <Testimonials />
+      <CTA />
     </>
   );
 }

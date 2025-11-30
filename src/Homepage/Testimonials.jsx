@@ -59,7 +59,7 @@ export default function Testimonials() {
         <section id="testimonials" className="py-20 bg-gray-50 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
-                <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-start">
+                <div className="lg:grid lg:grid-cols-2 lg:gap-10 items-start">
                     
                     {/* Left Column: Header, CTA, and Star Graphic */}
                     <div className="lg:sticky lg:top-10 lg:pt-10 mb-12 lg:mb-0">
