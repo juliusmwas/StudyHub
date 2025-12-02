@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { HiUser, HiAcademicCap, HiPencilAlt, HiArrowLeft } from 'react-icons/hi'; 
 import { useNavigate, useLocation } from 'react-router-dom'; 
 
+// --- Configuration ---
+// Make sure this matches your backend setup
+const API_BASE_URL = '/api/auth'; 
+
 // --- Reusable Form Input Component (Unchanged) ---
 const FormInput = ({ id, label, type = 'text', value, onChange, placeholder, required = true }) => (
     <div className="mb-4">
@@ -20,23 +24,30 @@ const FormInput = ({ id, label, type = 'text', value, onChange, placeholder, req
     </div>
 );
 
-// --- Login Form Component (UPDATED with Role Selection) ---
-const LoginForm = ({ switchToRegister, handleLogin }) => {
+// --- Login Form Component (UPDATED with API integration and Error Handling) ---
+const LoginForm = ({ switchToRegister, handleLogin, errorMsg }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('student'); // 👈 New state for role
+    const [role, setRole] = useState('student'); 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Pass role along with credentials
+        // The `role` is included in the data passed to the handler, 
+        // even though the backend /login endpoint might not strictly require it for lookup.
         handleLogin({ email, password, role }); 
-        console.log('Logging in with:', { email, password, role });
     };
 
     return (
         <form onSubmit={handleSubmit} className="p-8 sm:p-10">
             <h3 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h3>
             <p className="mb-8 text-gray-500">Sign in to access your StudyHub dashboard.</p>
+
+            {/* Error Message Display */}
+            {errorMsg && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <span className="block sm:inline">{errorMsg}</span>
+                </div>
+            )}
 
             <FormInput
                 id="login-email"
@@ -55,7 +66,7 @@ const LoginForm = ({ switchToRegister, handleLogin }) => {
                 placeholder="••••••••"
             />
 
-            {/* Role Selection Field (New Requirement) */}
+            {/* Role Selection Field (Used to set the client-side redirection path) */}
             <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                     Log in as
@@ -108,12 +119,13 @@ const LoginForm = ({ switchToRegister, handleLogin }) => {
     );
 };
 
-// --- Registration Form Component (Unchanged) ---
-const RegisterForm = ({ role, switchToLogin, handleRegister }) => {
+// --- Registration Form Component (UPDATED with API integration and Error Handling) ---
+const RegisterForm = ({ role, switchToLogin, handleRegister, errorMsg }) => {
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    // Note: The phone field is optional/tutor-specific, but the backend model requires it for Tutor registration
     const [phone, setPhone] = useState(''); 
 
     const handleSubmit = (e) => {
@@ -124,12 +136,12 @@ const RegisterForm = ({ role, switchToLogin, handleRegister }) => {
         }
 
         const userData = { fullName, email, password, role };
+        // If the backend expects phone for tutors, ensure it's included
         if (role === 'tutor') {
-            userData.phone = phone;
+            userData.phone = phone; 
         }
 
         handleRegister(userData);
-        console.log('Registering user:', userData);
     };
 
     const isTutor = role === 'tutor';
@@ -141,6 +153,13 @@ const RegisterForm = ({ role, switchToLogin, handleRegister }) => {
             </h3>
             <p className="mb-6 text-gray-500">Join StudyHub to start {isTutor ? 'teaching and mentoring.' : 'learning collaboratively.'}</p>
             
+            {/* Error Message Display */}
+            {errorMsg && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <span className="block sm:inline">{errorMsg}</span>
+                </div>
+            )}
+
             <FormInput
                 id="reg-fullname"
                 label="Full Name"
@@ -207,25 +226,20 @@ const RegisterForm = ({ role, switchToLogin, handleRegister }) => {
     );
 };
 
-// --- Back to Home Link Component (Simplified for placement logic) ---
+// --- Back to Home Link Component (Unchanged) ---
 const BackToHomeLink = ({ isDark = false, isFullWidth = false }) => {
     const navigate = useNavigate();
     
-    // Base classes for the link
     let baseClasses = "flex items-center justify-center gap-1 text-sm font-medium transition duration-150 p-3 rounded-lg";
     
     if (isDark) {
-        // Styling for the dark (Visual/Branding) column on large screens
         baseClasses += " text-gray-300 hover:text-white hover:bg-gray-800 relative z-10";
         if (isFullWidth) {
-             // Use this for the bottom of the card on mobile
             baseClasses += " w-full";
         }
     } else {
-        // Styling for the light (Form) column - used for the footer link
         baseClasses += " text-gray-600 hover:text-indigo-600";
         if (isFullWidth) {
-            // Use this for the bottom of the card on mobile
             baseClasses += " w-full";
         }
     }
@@ -242,7 +256,7 @@ const BackToHomeLink = ({ isDark = false, isFullWidth = false }) => {
 };
 
 
-// --- Main Auth Page Component ---
+// --- Main Auth Page Component (Updated Logic) ---
 export default function AuthPage() {
     const location = useLocation();
     const navigate = useNavigate();
@@ -251,30 +265,91 @@ export default function AuthPage() {
 
     const [currentView, setCurrentView] = useState(initialView); 
     const [registerRole, setRegisterRole] = useState('student'); 
+    const [error, setError] = useState(null); // New state for API errors
 
-    const handleLogin = (data) => {
-        console.log('Attempting Login:', data);
-        // navigate('/dashboard'); 
+    const handleLogin = async ({ email, password, role }) => {
+        setError(null); // Clear previous errors
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                // If login fails, display the backend message
+                setError(data.msg || 'Login failed. Please check your credentials.');
+                return;
+            }
+
+            // Success: Save token and user info to local storage
+            localStorage.setItem('token', data.token);
+            // We trust the backend to return the true role, but we also use the selected role for initial check
+            const userRole = data.user.role; 
+
+            // Redirect user based on their role
+            if (userRole === 'tutor') {
+                navigate('/tutor/dashboard');
+            } else {
+                navigate('/student/dashboard');
+            }
+
+        } catch (error) {
+            setError('Could not connect to the server. Please try again.');
+            console.error('Login Network Error:', error);
+        }
     };
 
-    const handleRegister = (data) => {
-        console.log('Attempting Registration:', data);
-        setCurrentView('login');
+    const handleRegister = async (userData) => {
+        setError(null); // Clear previous errors
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/signup`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                // If registration fails, display the backend message
+                setError(data.msg || 'Registration failed. Please try again.');
+                return;
+            }
+
+            // Success: Automatically switch to the login view
+            alert("Registration successful! Please log in with your new account.");
+            setCurrentView('login');
+
+        } catch (error) {
+            setError('Could not connect to the server. Please try again.');
+            console.error('Registration Network Error:', error);
+        }
     };
 
     const switchToRegister = (role) => {
+        setError(null);
         setRegisterRole(role);
         setCurrentView('register');
     };
 
     const switchToLogin = () => {
+        setError(null);
         setCurrentView('login');
     };
 
     // Render the form based on the current view
     const renderForm = () => {
         if (currentView === 'login') {
-            return <LoginForm switchToRegister={switchToRegister} handleLogin={handleLogin} />;
+            return <LoginForm 
+                switchToRegister={switchToRegister} 
+                handleLogin={handleLogin} 
+                errorMsg={error}
+            />;
         }
         
         return (
@@ -306,6 +381,7 @@ export default function AuthPage() {
                     role={registerRole} 
                     switchToLogin={switchToLogin} 
                     handleRegister={handleRegister} 
+                    errorMsg={error}
                 />
             </>
         );

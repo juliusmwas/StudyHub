@@ -16,7 +16,7 @@ const createToken = (user) => {
 
 // --- SIGNUP LOGIC (Step 2) ---
 exports.signup = async (req, res) => {
-    const { fullName, email, password, role, subjects, bio } = req.body;
+    const { fullName, email, password, role } = req.body;
 
     // 1. Check if user already exists
     const existingUser = await User.findOne({ email });
@@ -34,9 +34,7 @@ exports.signup = async (req, res) => {
             fullName,
             email,
             password: hashedPassword, // Store the hashed password
-            role,
-            subjects,
-            bio
+            role
         });
 
         // 4. Generate JWT Token
