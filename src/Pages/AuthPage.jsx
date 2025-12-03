@@ -292,10 +292,12 @@ export default function AuthPage() {
 
             // Redirect user based on their role
             if (userRole === 'tutor') {
-                navigate('/tutor/dashboard');
-            } else {
-                navigate('/student/dashboard');
-            }
+                    navigate('/tutor/dashboard');
+                } else {
+                    navigate('/student/dashboard');
+                }
+
+
 
         } catch (error) {
             setError('Could not connect to the server. Please try again.');

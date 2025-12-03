@@ -5,6 +5,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import StudentDashboard from './Pages/dashboard/student/Dashboard';
+import TutorDashboard from './Pages/dashboard/tutor/Dashboard';
+
 
 function App() {
 
@@ -26,9 +29,9 @@ function App() {
         <Route path="/auth" element={<AuthPage />} />
 
         {/* Future Dashboard Routes */}
-        {/* <Route path="/dashboard" element={<StudentDashboard />} /> */}
-        {/* <Route path="/dashboard/tutor" element={<TutorDashboard />} /> */}
-        {/* <Route path="/admin" element={<AdminDashboard />} /> */}
+        <Route path="/student/dashboard" element={<StudentDashboard />} />
+        <Route path="/tutor/dashboard" element={<TutorDashboard />} />
+
       </Routes>
     </Router>
   );
