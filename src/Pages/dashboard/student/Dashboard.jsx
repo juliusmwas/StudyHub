@@ -59,12 +59,6 @@ export default function StudentDashboard() {
     ))}
     </section>
 
-
-
-
-
-
-
           {/* Upcoming Classes (Glassy + Minimal + Clean) */}
           <section className="mb-14">
             <div className="flex justify-between items-center mb-4">
