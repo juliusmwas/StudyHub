@@ -57,12 +57,7 @@ export default function ReviewLesson() {
             >
               Back to Dashboard
             </Link>
-            <Link
-              to={`/student/lessons/${lesson.id}/notes`}
-              className="px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition font-semibold"
-            >
-              View Notes
-            </Link>
+            
           </div>
 
         </div>

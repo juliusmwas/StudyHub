@@ -12,6 +12,8 @@ import StudentSchedule from './Pages/dashboard/student/Lessons/StudentSchedule';
 import StudentMessages from "./Pages/dashboard/student/Messages/StudentMessages";
 import CompletedLessons from "./Pages/dashboard/student/Lessons/CompletedLessons";
 import ReviewLesson from "./Pages/dashboard/student/Lessons/ReviewLesson";
+import StudentProgress from "./Pages/dashboard/student/Progress/StudentProgress";
+
 
 
 function App() {
@@ -41,6 +43,8 @@ function App() {
         <Route path="/student/messages" element={<StudentMessages />}/>
         <Route path="/student/lessons/completed" element={<CompletedLessons />}/>
         <Route path="/student/lessons/:id/review" element={<ReviewLesson />} />
+        <Route path="/student/progress" element={<StudentProgress />} />
+      
         
 
       </Routes>
