@@ -7,6 +7,7 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import StudentDashboard from './Pages/dashboard/student/Dashboard';
 import TutorDashboard from './Pages/dashboard/tutor/Dashboard';
+import ContinueLesson from './Pages/dashboard/student/Lessons/ContinueLesson';
 
 
 function App() {
@@ -31,6 +32,8 @@ function App() {
         {/* Future Dashboard Routes */}
         <Route path="/student/dashboard" element={<StudentDashboard />} />
         <Route path="/tutor/dashboard" element={<TutorDashboard />} />
+        <Route path="/student/lessons/continue" element={<ContinueLesson />}
+/>
 
       </Routes>
     </Router>

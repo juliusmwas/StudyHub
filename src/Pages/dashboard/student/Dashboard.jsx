@@ -1,4 +1,6 @@
 import StudentNavbar from "../../../Components/StudentNavbar.jsx";
+import { Link } from "react-router-dom";
+
 
 export default function StudentDashboard() {
   return (
@@ -22,9 +24,13 @@ export default function StudentDashboard() {
 
               {/* Mini CTA */}
               <div className="mt-6">
-                <button className="px-6 py-3 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700 transition font-semibold">
-                  Continue Last Lesson →
-                </button>
+                <Link
+                    to="/student/lessons/continue"
+                    className="inline-block px-6 py-3 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700 transition font-semibold"
+                    >
+                    Continue Last Lesson
+                </Link>
+
               </div>
             </div>
           </section>
