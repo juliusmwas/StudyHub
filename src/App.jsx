@@ -11,6 +11,8 @@ import ContinueLesson from './Pages/dashboard/student/Lessons/ContinueLesson';
 import StudentSchedule from './Pages/dashboard/student/Lessons/StudentSchedule';
 import StudentMessages from "./Pages/dashboard/student/Messages/StudentMessages";
 import CompletedLessons from "./Pages/dashboard/student/Lessons/CompletedLessons";
+import ReviewLesson from "./Pages/dashboard/student/Lessons/ReviewLesson";
+
 
 function App() {
 
@@ -38,6 +40,8 @@ function App() {
         <Route path="/student/schedule" element={<StudentSchedule />}/>
         <Route path="/student/messages" element={<StudentMessages />}/>
         <Route path="/student/lessons/completed" element={<CompletedLessons />}/>
+        <Route path="/student/lessons/:id/review" element={<ReviewLesson />} />
+        
 
       </Routes>
     </Router>
