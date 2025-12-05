@@ -15,7 +15,7 @@ export default function StudentDashboard() {
           {/* Hero Section */}
           <section className="mb-10">
             <div className="bg-white/60 backdrop-blur-xl p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-white">
-              <h1 className="text-4xl font-semibold text-gray-900">
+              <h1 className="text-3xl font-semibold text-gray-900">
                 Welcome back, Julius 👋
               </h1>
               <p className="text-gray-600 mt-2 text-lg">
@@ -26,7 +26,7 @@ export default function StudentDashboard() {
               <div className="mt-6">
                 <Link
                     to="/student/lessons/continue"
-                    className="inline-block px-6 py-3 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700 transition font-semibold"
+                    className="inline-block px-4 py-2 text-sm bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition font-semibold"
                     >
                     Continue Last Lesson
                 </Link>
@@ -35,28 +35,35 @@ export default function StudentDashboard() {
             </div>
           </section>
 
-          {/* Quick Stats - Modern Glass Cards */}
-          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {[
-              { title: "Next Session", value: "Math • 2:00 PM", icon: "📅" },
-              { title: "Messages", value: "3 New", icon: "💬" },
-              { title: "Completed Lessons", value: "14", icon: "📘" },
-              { title: "Learning Streak", value: "5 Days 🔥", icon: "⚡" },
-            ].map((card, i) => (
-              <div
-                key={i}
-                className="bg-white/50 backdrop-blur-xl p-6 rounded-2xl shadow-lg border border-white hover:shadow-xl transition-all cursor-pointer"
-              >
-                <div className="text-4xl">{card.icon}</div>
-                <h3 className="font-semibold text-gray-800 mt-3 text-lg">
-                  {card.title}
-                </h3>
-                <p className="text-2xl font-bold text-gray-900 mt-2">
-                  {card.value}
-                </p>
-              </div>
-            ))}
-          </section>
+     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+    {[
+        { title: "Next Session", value: "Math • 2:00 PM", icon: "📅", link: "/student/schedule", gradient: "from-sky-400 to-sky-500" },
+        { title: "Messages", value: "3 New", icon: "💬", link: "/student/messages", gradient: "from-stone-300 to-stone-400" },
+        { title: "Completed Lessons", value: "14", icon: "📘", link: "/student/lessons/completed", gradient: "from-emerald-300 to-emerald-400" },
+        { title: "Learning Streak", value: "5 Days", icon: "⚡", link: "/student/progress", gradient: "from-indigo-300 to-indigo-400" },
+    ].map((card, i) => (
+        <Link
+        to={card.link}               
+        key={i}
+        className={`block bg-gradient-to-r ${card.gradient} p-6 rounded-2xl shadow-md hover:shadow-lg transition-all cursor-pointer`}
+        >
+        <div className="flex gap-5">
+            <div className="text-xl">{card.icon}</div>
+            <h3 className="font-semibold text-gray-800 mb-4 text-xl">{card.title}</h3>
+        </div>
+        
+        <p className="text-xl font-semibold mt-5 text-center" style={{ fontFamily: '"Comic Sans MS", cursive, sans-serif' }}>
+            {card.value}
+        </p>
+        </Link>
+    ))}
+    </section>
+
+
+
+
+
+
 
           {/* Upcoming Classes (Glassy + Minimal + Clean) */}
           <section className="mb-14">
