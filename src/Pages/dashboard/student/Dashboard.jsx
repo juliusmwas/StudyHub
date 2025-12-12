@@ -62,32 +62,40 @@ export default function StudentDashboard() {
           {/* Upcoming Classes (Glassy + Minimal + Clean) */}
           <section className="mb-14">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-semibold text-gray-900">
-                Upcoming Classes
-              </h2>
-              <button className="text-blue-600 hover:underline font-medium">
+              <h2 className="text-2xl font-semibold text-gray-900">Upcoming Classes</h2>
+
+              <Link
+                to="/student/classes"
+                className="text-blue-600 hover:underline font-medium"
+              >
                 View all
-              </button>
+              </Link>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
-                { subject: "Mathematics", tutor: "Mr. Kamau", time: "Today • 2:00 PM" },
-                { subject: "Chemistry", tutor: "Ms. Wanjiku", time: "Tomorrow • 11:00 AM" },
-                { subject: "English", tutor: "Mr. Otieno", time: "Fri • 9:00 AM" },
-              ].map((cls, i) => (
-                <div
-                  key={i}
-                  className="bg-white/60 backdrop-blur-xl p-6 rounded-3xl border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-xl transition cursor-pointer"
+                { id: 1, subject: "Mathematics", tutor: "Mr. Kamau", time: "Today • 2:00 PM" },
+                { id: 2, subject: "Chemistry", tutor: "Ms. Wanjiku", time: "Tomorrow • 11:00 AM" },
+                { id: 3, subject: "English", tutor: "Mr. Otieno", time: "Fri • 9:00 AM" },
+              ].map((cls) => (
+                <Link
+                  key={cls.id}
+                  to={`/student/classes/${cls.id}`}
+                  className="bg-white/60 backdrop-blur-xl p-6 rounded-3xl border border-white 
+                            shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-xl transition block"
                 >
                   <h3 className="text-xl font-semibold text-gray-900">{cls.subject}</h3>
                   <p className="text-gray-600 mt-1">Tutor: {cls.tutor}</p>
                   <p className="text-gray-800 font-medium mt-3">{cls.time}</p>
 
-                  <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">
+                  <Link
+                    to={`/student/class/${cls.id}/live`}
+                    className="mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded-xl 
+                            hover:bg-blue-700 transition"
+                  >
                     Join Class
-                  </button>
-                </div>
+                  </Link>
+                </Link>
               ))}
             </div>
           </section>

@@ -13,7 +13,9 @@ import StudentMessages from "./Pages/dashboard/student/Messages/StudentMessages"
 import CompletedLessons from "./Pages/dashboard/student/Lessons/CompletedLessons";
 import ReviewLesson from "./Pages/dashboard/student/Lessons/ReviewLesson";
 import StudentProgress from "./Pages/dashboard/student/Progress/StudentProgress";
-
+import AllClasses from "./Pages/dashboard/student/Classes/AllClasses";
+import ClassDetails from './Pages/dashboard/student/Classes/ClassDetails';
+import JoinLiveClass from './Pages/dashboard/student/Classes/JoinLiveClass';
 
 
 function App() {
@@ -44,6 +46,10 @@ function App() {
         <Route path="/student/lessons/completed" element={<CompletedLessons />}/>
         <Route path="/student/lessons/:id/review" element={<ReviewLesson />} />
         <Route path="/student/progress" element={<StudentProgress />} />
+        <Route path="/student/classes" element={<AllClasses />} />
+        <Route path="/student/classes/:id" element={<ClassDetails />} />
+        <Route path="/student/class/:id/live" element={<JoinLiveClass />} />
+
       
         
 
