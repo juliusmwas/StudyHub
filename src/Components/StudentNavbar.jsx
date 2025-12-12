@@ -72,56 +72,61 @@ const NavLink = ({ icon: Icon, label, href, isActive }) => (
 /* ------------------------------ Profile Menu -------------------------------- */
 
 const ProfileDropdown = ({ onLogout }) => {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate(); // <- must be inside the component body
 
-    const items = [
-        { name: 'My Profile', href: '#/profile', icon: UserCircle },
-        { name: 'Settings', href: '#/settings', icon: Cog },
-        { name: 'Support / Help', href: '#/support', icon: Support },
-        { name: 'Logout', action: onLogout, icon: OutlineLogout, isDestructive: true },
-    ];
+  const items = [
+    { name: 'My Profile', href: '/student/profile', icon: UserCircle },
+    { name: 'Settings', href: '/student/settings', icon: Cog },
+    { name: 'Support / Help', href: '/student/support', icon: Support },
+    { name: 'Logout', action: onLogout, icon: OutlineLogout, isDestructive: true },
+  ];
 
-
-
-    return (
-        <div className="relative">
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 p-1 rounded-full border-2 border-transparent hover:border-indigo-500 transition-colors"
-            >
-                <div className="w-9 h-9 bg-indigo-500 text-white rounded-full flex items-center justify-center font-bold text-sm">
-                    JD
-                </div>
-                <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`} />
-            </button>
-
-            {isOpen && (
-                <div className="absolute right-0 mt-2 w-52 bg-white border border-gray-100 rounded-xl shadow-xl z-30">
-                    <div className="p-2">
-                        {items.map((item) => (
-                            <button
-                                key={item.name}
-                                onClick={() => {
-                                    if (item.action) item.action();
-                                    setIsOpen(false);
-                                }}
-                                className={`
-                                    w-full flex items-center gap-3 px-3 py-2 text-sm rounded-lg
-                                    ${item.isDestructive ?
-                                        "text-red-600 hover:bg-red-50" :
-                                        "text-gray-700 hover:bg-indigo-50 hover:text-indigo-600"
-                                    }
-                                `}
-                            >
-                                <item.icon className="w-4 h-4" />
-                                {item.name}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            )}
+  return (
+    <div className="relative">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 p-1 rounded-full border-2 border-transparent hover:border-indigo-500 transition-colors duration-200 focus:outline-none"
+        aria-expanded={isOpen}
+      >
+        {/* Placeholder for Avatar/User Initial */}
+        <div className="w-9 h-9 bg-indigo-500 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-inner">
+          JD
         </div>
-    );
+        <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${isOpen ? 'transform rotate-180' : ''}`} />
+      </button>
+
+      {isOpen && (
+        <div className="absolute right-0 mt-2 w-52 bg-white border border-gray-100 rounded-xl shadow-2xl z-30 transform origin-top-right animate-fade-in-down">
+          <div className="p-2">
+            {items.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => {
+                  if (item.action) {
+                    item.action(); // for logout
+                  } else if (item.href) {
+                    navigate(item.href); // navigate to route
+                  }
+                  setIsOpen(false);
+                }}
+                className={`
+                  w-full text-left flex items-center gap-3 px-3 py-2 text-sm rounded-lg transition-colors
+                  ${item.isDestructive 
+                    ? 'text-red-600 hover:bg-red-50' 
+                    : 'text-gray-700 hover:bg-indigo-50 hover:text-indigo-600'
+                  }
+                `}
+              >
+                <item.icon className="w-4 h-4" />
+                {item.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 /* -------------------------------------------------------------------------- */
@@ -214,9 +219,13 @@ const navigate = useNavigate();
                     <NavLink icon={ClipboardCheck} label="Assignments" href="#/assignments" isActive={activeTab === 'Assignments'} />
 
                     <div className="pt-3 border-t">
-                        <button className="flex gap-3 items-center text-gray-700 py-2">
+                        <button
+                            className="flex gap-3 items-center text-gray-700 py-2"
+                            onClick={() => navigate("/student/profile")}
+                            >
                             <UserCircle className="w-5 h-5" /> My Profile
-                        </button>
+                            </button>
+
                         <button className="flex gap-3 items-center text-gray-700 py-2">
                             <Cog className="w-5 h-5" /> Settings
                         </button>
