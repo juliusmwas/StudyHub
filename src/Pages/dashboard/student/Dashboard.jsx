@@ -124,22 +124,21 @@ export default function StudentDashboard() {
 
           {/* Resource Shortcuts — redesigned to look more premium */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-              Quick Resources
-            </h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Quick Resources</h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {[
-                "📘 Recent Notes",
-                "📂 Popular Study PDFs",
-                "🎥 Video Lessons",
+                { label: "📘 Recent Notes", link: "/student/resources/notes" },
+                { label: "📂 Popular Study PDFs", link: "/student/resources/pdfs" },
+                { label: "🎥 Video Lessons", link: "/student/resources/videos" },
               ].map((item, i) => (
-                <div
-                  key={i}
-                  className="bg-white/50 backdrop-blur-xl p-8 border border-white rounded-3xl shadow-lg hover:shadow-2xl transition text-center text-xl font-semibold text-gray-800 cursor-pointer"
-                >
-                  {item}
-                </div>
+                <Link key={i} to={item.link}>
+                  <div className="bg-white/50 backdrop-blur-xl p-8 border border-white rounded-3xl 
+                                  shadow-lg hover:shadow-2xl transition text-center text-xl 
+                                  font-semibold text-gray-800 cursor-pointer">
+                    {item.label}
+                  </div>
+                </Link>
               ))}
             </div>
           </section>
