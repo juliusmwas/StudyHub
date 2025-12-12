@@ -21,6 +21,7 @@ import PDFs from './Pages/dashboard/student/Resources/PDFs';
 import Videos from './Pages/dashboard/student/Resources/Videos';
 import Notifications from './Pages/dashboard/student/Notifications/Notifications';
 import Profile from './Pages/dashboard/student/Profile';
+import Settings from './Pages/dashboard/student/Settings';
 
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
         <Route path="/student/Resources/videos" element={<Videos />} />
         <Route path="/student/Notifications" element={<Notifications />} />
         <Route path="/student/Profile" element={<Profile />} />
+        <Route path="/student/Settings" element={<Settings />} />
 
 
       
