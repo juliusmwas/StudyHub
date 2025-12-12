@@ -19,7 +19,7 @@ export default function StudentProgress() {
     <>
       <StudentNavbar />
 
-      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-indigo-100 px-6 py-10">
+      <div className="min-h-screen bg-linear-to-br from-indigo-50 via-white to-indigo-100 px-6 py-10">
         <div className="max-w-6xl mx-auto">
 
           {/* Header */}
@@ -35,45 +35,50 @@ export default function StudentProgress() {
 
             {/* Learning Streak */}
             <div className="bg-white/60 backdrop-blur-xl p-6 rounded-3xl border border-white shadow-lg flex flex-col items-center">
-              <div className="relative w-32 h-32">
-                {/* Progress Ring */}
-                <svg className="transform -rotate-90" viewBox="0 0 36 36">
-                  <circle
-                    className="text-gray-200"
-                    strokeWidth="4"
-                    stroke="currentColor"
-                    fill="transparent"
-                    r="16"
-                    cx="18"
-                    cy="18"
-                  />
-                  <circle
-                    className="text-indigo-500"
-                    strokeWidth="4"
-                    strokeDasharray={`${progressData.streak * 20}, 100`}
-                    strokeLinecap="round"
-                    stroke="currentColor"
-                    fill="transparent"
-                    r="16"
-                    cx="18"
-                    cy="18"
-                  />
-                  <text
-                    x="50%"
-                    y="50%"
-                    dominantBaseline="middle"
-                    textAnchor="middle"
-                    className="text-gray-900 font-semibold text-lg"
-                  >
-                    {progressData.streak} Days
-                  </text>
-                </svg>
-              </div>
-              <p className="mt-4 text-gray-700 font-medium text-center">Learning Streak</p>
-              <p className="mt-2 text-gray-500 text-center text-sm">
-                Keep going! You’re on a roll.
-              </p>
-            </div>
+  <div className="relative w-32 h-32 flex items-center justify-center">
+
+    {/* Progress Ring */}
+    <svg className="transform -rotate-90 w-full h-full" viewBox="0 0 36 36">
+      {/* Background circle */}
+      <circle
+        className="text-gray-200"
+        strokeWidth="4"
+        stroke="currentColor"
+        fill="transparent"
+        r="16"
+        cx="18"
+        cy="18"
+      />
+
+      {/* Progress circle */}
+      <circle
+        className="text-indigo-500"
+        strokeWidth="4"
+        strokeDasharray={`${progressData.streak * 20}, 100`}
+        strokeLinecap="round"
+        stroke="currentColor"
+        fill="transparent"
+        r="16"
+        cx="18"
+        cy="18"
+      />
+    </svg>
+
+    {/* Perfectly Centered Text Overlay */}
+    <div className="absolute inset-0 flex items-center justify-center">
+      <span className="text-gray-900 font-semibold text-lg">
+        {progressData.streak} Days
+      </span>
+    </div>
+
+  </div>
+
+  <p className="mt-4 text-gray-700 font-medium text-center">Learning Streak</p>
+  <p className="mt-2 text-gray-500 text-center text-sm">
+    Keep going! You’re on a roll.
+  </p>
+</div>
+
 
             {/* Total Lessons Completed */}
             <div className="bg-white/60 backdrop-blur-xl p-6 rounded-3xl border border-white shadow-lg flex flex-col items-center justify-center">
