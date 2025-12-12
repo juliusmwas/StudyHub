@@ -179,10 +179,16 @@ const navigate = useNavigate();
                             </button>
 
                         {/* Messages */}
-                        <button className="relative p-2 rounded-full hover:bg-gray-100 text-gray-600">
+                       <button
+                            className="relative p-2 rounded-full hover:bg-gray-100 text-gray-600"
+                            onClick={() => navigate("/student/messages")}
+                            >
                             <ChatAlt2 className="w-6 h-6" />
-                            <span className="absolute top-0 right-0 bg-green-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">2</span>
-                        </button>
+                            <span className="absolute top-0 right-0 bg-green-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                                2
+                            </span>
+                            </button>
+
 
                         {/* Profile */}
                         <ProfileDropdown onLogout={handleLogout} />

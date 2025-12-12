@@ -13,7 +13,7 @@ export default function StudentDashboard() {
         <div className="max-w-7xl mx-auto">
 
           {/* Hero Section */}
-          <section className="mb-10">
+          <section id="dashboard" className="mb-10">
             <div className="bg-white/60 backdrop-blur-xl p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-white">
               <h1 className="text-3xl font-semibold text-gray-900">
                 Welcome back, Julius 👋
