@@ -16,6 +16,10 @@ import StudentProgress from "./Pages/dashboard/student/Progress/StudentProgress"
 import AllClasses from "./Pages/dashboard/student/Classes/AllClasses";
 import ClassDetails from './Pages/dashboard/student/Classes/ClassDetails';
 import JoinLiveClass from './Pages/dashboard/student/Classes/JoinLiveClass';
+import Notes from './Pages/dashboard/student/Resources/Notes';
+import PDFs from './Pages/dashboard/student/Resources/PDFs';
+import Videos from './Pages/dashboard/student/Resources/Videos';
+import Notifications from './Pages/dashboard/student/Notifications/Notifications';
 
 
 function App() {
@@ -49,6 +53,11 @@ function App() {
         <Route path="/student/classes" element={<AllClasses />} />
         <Route path="/student/classes/:id" element={<ClassDetails />} />
         <Route path="/student/class/:id/live" element={<JoinLiveClass />} />
+        <Route path="/student/Resources/notes" element={<Notes />} />
+        <Route path="/student/Resources/pdfs" element={<PDFs />} />
+        <Route path="/student/Resources/videos" element={<Videos />} />
+        <Route path="/student/Notifications" element={<Notifications />} />
+
 
       
         

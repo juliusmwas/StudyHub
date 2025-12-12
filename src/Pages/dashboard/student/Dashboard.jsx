@@ -60,7 +60,7 @@ export default function StudentDashboard() {
     </section>
 
           {/* Upcoming Classes (Glassy + Minimal + Clean) */}
-          <section className="mb-14">
+          <section id="classes" className="mb-14">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-semibold text-gray-900">Upcoming Classes</h2>
 

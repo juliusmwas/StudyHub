@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
+
+
 
 /* -------------------------------------------------------------------------- */
 /*                               ICON COMPONENTS                               */
@@ -63,6 +67,8 @@ const NavLink = ({ icon: Icon, label, href, isActive }) => (
     </a>
 );
 
+
+
 /* ------------------------------ Profile Menu -------------------------------- */
 
 const ProfileDropdown = ({ onLogout }) => {
@@ -74,6 +80,8 @@ const ProfileDropdown = ({ onLogout }) => {
         { name: 'Support / Help', href: '#/support', icon: Support },
         { name: 'Logout', action: onLogout, icon: OutlineLogout, isDestructive: true },
     ];
+
+
 
     return (
         <div className="relative">
@@ -122,7 +130,7 @@ const ProfileDropdown = ({ onLogout }) => {
 
 export default function StudentNavbar({ activeTab = 'Dashboard' }) {
     const [mobileOpen, setMobileOpen] = useState(false);
-
+const navigate = useNavigate();
     const handleLogout = () => {
         console.log("Logging out...");
     };
@@ -141,9 +149,9 @@ export default function StudentNavbar({ activeTab = 'Dashboard' }) {
 
                     {/* Desktop Middle Nav */}
                     <div className="hidden md:flex gap-4">
-                        <NavLink icon={Home} label="Dashboard" href="#/dashboard" isActive={activeTab === 'Dashboard'} />
-                        <NavLink icon={BookOpen} label="Classes" href="#/courses" isActive={activeTab === 'Courses'} />
-                        <NavLink icon={ClipboardCheck} label="Assignments" href="#/assignments" isActive={activeTab === 'Assignments'} />
+                        <NavLink icon={Home} label="Dashboard" href="#dashboard" isActive={activeTab === 'Dashboard'} />
+                        <NavLink icon={BookOpen} label="Classes" href="#classes" isActive={activeTab === 'Classes'} />
+                        <NavLink icon={ClipboardCheck} label="Assignments" href="#assignments" isActive={activeTab === 'Assignments'} />
                     </div>
 
                     {/* Right actions */}
@@ -160,10 +168,15 @@ export default function StudentNavbar({ activeTab = 'Dashboard' }) {
                         </div>
 
                         {/* Notifications */}
-                        <button className="relative p-2 rounded-full hover:bg-gray-100 text-gray-600">
+                        <button
+                            className="relative p-2 rounded-full hover:bg-gray-100 text-gray-600"
+                            onClick={() => navigate("/student/Notifications")}
+                            >
                             <Bell className="w-6 h-6" />
-                            <span className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">4</span>
-                        </button>
+                            <span className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                                4
+                            </span>
+                            </button>
 
                         {/* Messages */}
                         <button className="relative p-2 rounded-full hover:bg-gray-100 text-gray-600">
@@ -191,7 +204,7 @@ export default function StudentNavbar({ activeTab = 'Dashboard' }) {
                 <div className="md:hidden bg-white border-t border-gray-100 p-4 space-y-3 animate-fade-in-down">
 
                     <NavLink icon={Home} label="Dashboard" href="#/dashboard" isActive={activeTab === 'Dashboard'} />
-                    <NavLink icon={BookOpen} label="Classes" href="#/courses" isActive={activeTab === 'Courses'} />
+                    <NavLink icon={BookOpen} label="Classes" href="#/classes" isActive={activeTab === 'Classes'} />
                     <NavLink icon={ClipboardCheck} label="Assignments" href="#/assignments" isActive={activeTab === 'Assignments'} />
 
                     <div className="pt-3 border-t">
