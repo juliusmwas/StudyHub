@@ -1,11 +1,15 @@
-
+import TutorNavbar from "../../../Components/TutorNavbar";
 
 
 export default function TutorDashboard(){
     
     return(
-        <div>
+        <>
+            <TutorNavbar/>
+            <div>
             <h1>Welcome to the tutors dashboard</h1>
         </div>
+        </>
+        
     );
 }
