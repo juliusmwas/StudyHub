@@ -36,7 +36,7 @@ const Navbar = () => {
           {/* 1. Platform Logo */}
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer">
-              <h1 className="font-bold text-xl text-gray-900 ">Study<span className='text-indigo-600'>Hub</span></h1>
+              <h1 className="font-bold text-xl text-gray-900">Study<span className='text-indigo-600'>Hub</span></h1>
             </div>
           </div>
 
