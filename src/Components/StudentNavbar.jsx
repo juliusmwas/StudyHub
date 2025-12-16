@@ -104,8 +104,10 @@ const ProfileDropdown = ({ onLogout }) => {
                 key={item.name}
                 onClick={() => {
                   if (item.action) {
-                    item.action(); // for logout
-                  } else if (item.href) {
+                    item.action(); // ✅ calls handleLogout
+                    }
+                    else if (item.href) 
+                    {
                     navigate(item.href); // navigate to route
                   }
                   setIsOpen(false);
@@ -137,8 +139,15 @@ export default function StudentNavbar({ activeTab = 'Dashboard' }) {
     const [mobileOpen, setMobileOpen] = useState(false);
 const navigate = useNavigate();
     const handleLogout = () => {
-        console.log("Logging out...");
+        // 1. Clear auth data (adjust based on your auth system)
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+
+        // 2. Redirect to login
+        navigate("/login", { replace: true });
     };
+
+
 
     return (
         <nav className="sticky top-0 z-20 bg-white shadow border-b border-gray-100">
