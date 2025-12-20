@@ -23,7 +23,7 @@ import Notifications from './Pages/dashboard/student/Notifications/Notifications
 import Profile from './Pages/dashboard/student/Profile';
 import Settings from './Pages/dashboard/student/Settings';
 import Support from './Pages/dashboard/student/Support';
-
+import SchedulePage from './Pages/dashboard/tutor/SchedulePage ';
 
 
 function App() {
@@ -64,8 +64,7 @@ function App() {
         <Route path="/student/Profile" element={<Profile />} />
         <Route path="/student/Settings" element={<Settings />} />
         <Route path="/student/Support" element={<Support />} />
-
-
+        <Route path="/tutor/SchedulePage" element={<SchedulePage />} />
       
         
 

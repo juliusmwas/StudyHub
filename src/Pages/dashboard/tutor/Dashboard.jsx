@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   Video, 
-  Play, // Add this
+  Play, 
   Users, 
   Clock, 
   AlertCircle, 
@@ -16,6 +16,7 @@ import {
   MessageSquare 
 } from 'lucide-react';
 import TutorNavbar from "../../../Components/TutorNavbar";
+import { Link } from "react-router-dom";
 
 export default function TutorDashboard() {
   const todayClasses = [
@@ -89,7 +90,12 @@ export default function TutorDashboard() {
           <div className="lg:col-span-2 space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-bold text-gray-900">Today's Schedule</h2>
-              <button className="text-blue-600 text-sm font-medium hover:underline">View Calendar</button>
+              <Link
+                    to="/tutor/SchedulePage"
+                    className="text-blue-600 text-sm font-medium hover:underline"
+                    >
+                    View Calendar
+                </Link>
             </div>
             
             <div className="space-y-4">
