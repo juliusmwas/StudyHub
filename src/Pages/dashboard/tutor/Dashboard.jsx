@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { 
   Video, 
   Play, 
@@ -24,6 +24,7 @@ export default function TutorDashboard() {
     { id: 2, title: 'Introduction to UI/UX', subject: 'Design', time: '16:00 - 17:00', students: 12, status: 'Upcoming' },
     { id: 3, title: 'Database Schema Design', subject: 'Backend', time: '09:00 - 10:30', students: 18, status: 'Completed' },
   ];
+
 
   return (
     <div className="min-h-screen bg-gray-50/50">
@@ -53,9 +54,11 @@ export default function TutorDashboard() {
               <span className="text-xs font-bold bg-blue-400/30 px-2 py-1 rounded">IN 45 MINS</span>
             </div>
             <h3 className="text-lg font-bold leading-tight">Advanced React Patterns</h3>
-            <button className="mt-4 w-full bg-white text-blue-600 py-2 rounded-lg font-semibold text-sm hover:bg-blue-50 transition-colors flex items-center justify-center gap-2">
+            <Link 
+              to="/tutor/LiveSessionPage" 
+              className="mt-4 w-full bg-white text-blue-600 py-2 rounded-lg font-semibold text-sm hover:bg-blue-50 transition-colors flex cursor-pointer items-center justify-center gap-2">
               <Play size={16} fill="currentColor" /> Start Class
-            </button>
+            </Link>
           </div>
 
           {/* Card 3: Total Students */}
