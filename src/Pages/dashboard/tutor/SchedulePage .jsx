@@ -1,55 +1,106 @@
-import { Link } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
+
+const sessions = [
+    {
+        id: 1,
+        className: "Algebra Basics",
+        date: "2026-01-03",
+        time: "10:00 AM",
+        students: 12,
+        status: "upcoming",
+    },
+    {
+        id: 2,
+        className: "Physics - Motion",
+        date: "2026-01-03",
+        time: "4:00 AM",
+        students: 7,
+        status: "live",
+    },
+    {
+        id: 1,
+        className: "Web development",
+        date: "2026-01-03",
+        time: "5:00 AM",
+        students: 12,
+        status: "completed",
+    },
+]
 
 export default function SchedulePage (){
+
+    const navigate = useNavigate()
+
+    const getStatusStyle = (status) => {
+        if (status === "live")return "bg-green-100 text-green-700";
+        if (status === "completed")return "bg-gray-100 text-gray-700";
+        return "bg-blue-100 text-blue-700";  
+    };
+    
     return(
         <>
-            <div className="mt-1">
-                <div className="flex items-center  justify-between bg-white shadow-sm py-5 px-5">
-                    <h1 className="text-lg cursor-pointer font-medium text-blue-600">Back to Dashboard</h1>
-                    <button className="cursor-pointer inline-block px-4 py-2 text-sm bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition font-semibold">+ Add Session</button>
+            <div className="p-8">
+                <h1 className="text-3xl font-bold mb-6">Class Schedule</h1>
+
+                <div className="bg-white shadow rounded-xl overflow-hidden">
+                    <table className="w-full">
+                        <thead className="bg-gray-100 text-left">
+                            <tr>
+                                <th className="p-4">Class</th>
+                                <th className="p-4">Date</th>
+                                <th className="p-4">Time</th>
+                                <th className="p-4">Students</th>
+                                <th className="p-4">Status</th>
+                                <th className="p-4">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {sessions.map((session) => (
+                                <tr key={session.id} className="border-b">
+                                    <td className="p-4 ">{session.className}</td>
+                                    <td className="p-4 ">{session.date}</td>
+                                    <td className="p-4 ">{session.time}</td>
+                                    <td className="p-4 ">{session.students}</td>
+
+                                    <td className="p-4">
+                                        <span className={`px-3 py-1 rounded-full text-sm ${getStatusStyle(session.status)}`}>
+                                            {session.status}
+                                        </span>
+                                    </td>
+
+                                    <td className="p-4">
+                                        {session.status === "live" && (
+                                            <button
+                                                onClick={() => navigate("dashboard/tutor/live")}
+                                                className="px-4 py-2 bg-green-600 text-white rounded-lg"
+                                            >Join</button>
+                                        )}
+
+                                        {session.status === "upcoming" && (
+                                            <button
+                                                onClick={() => navigate("dashboard/tutor/live")}
+                                                className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+                                            >Start</button>
+                                        )}
+
+                                        {session.status === "completed" && (
+                                            <button
+                                                onClick={() => navigate("dashboard/tutor/session-summary")}
+                                                className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+                                            >View</button>
+                                        )}
+
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+
+                    </table>
+
                 </div>
 
-                <div className=" bg-white shadow-sg rounded-2xl px-5 py-3 m-5">
-                    <h1 className="grid justify-items-center text-xl font-bold text-gray-900 px-5 py-5 mt-5">My Teaching Schedule</h1>
-                    <div className="flex justify-center items-center py-5  gap-5">
-                        <button className="cursor-pointer inline-block px-4 py-2 text-sm bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition font-semibold">Day</button>
-                        <button className="cursor-pointer inline-block px-4 py-2 text-sm bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition font-semibold">Week</button>
-                        <button className="cursor-pointer inline-block px-4 py-2 text-sm bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition font-semibold">Month</button>
-                    </div>
-                    
-                </div>
-
-                <div className="flex m-5 items-center gap-5 justify-evenly">
-                     <div className="bg-white px-5 text-center w-fit rounded-lg shadow-sm py-5 hover:shadow-lg hover:scale-[1.02] transition-all cursor-pointer">
-                        <h2 className="text-gray-800 font-semibold text-sm p-1">Oct 21 - Oct 27</h2>
-                        <h1 className="text-gray-800 font-semibold text-lg">Advanced React Patterns</h1>
-                        <p className="text-gray-800 font-normal text-lg">Time: 14:00-15:30</p>
-                        <p className="text-gray-800 font-normal text-lg">Type: <span className="font-semibold">Group Class</span></p>
-                     </div>
-
-                    <div className="bg-white px-5 text-center w-fit rounded-lg shadow-sm py-5 hover:shadow-lg hover:scale-[1.02] transition-all cursor-pointer">
-                        <h2 className="text-gray-800 font-semibold text-sm p-1">Oct 21 - Oct 27</h2>
-                        <h1 className="text-gray-800 font-semibold text-lg">Advanced React Patterns</h1>
-                        <p className="text-gray-800 font-normal text-lg">Time: 14:00-15:30</p>
-                        <p className="text-gray-800 font-normal text-lg">Type: <span className="font-semibold">Group Class</span></p>
-                     </div>
-
-                     <div className="bg-white px-5 text-center w-fit rounded-lg shadow-sm py-5 hover:shadow-lg hover:scale-[1.02] transition-all cursor-pointer">
-                        <h2 className="text-gray-800 font-semibold text-sm p-1">Oct 21 - Oct 27</h2>
-                        <h1 className="text-gray-800 font-semibold text-lg">Advanced React Patterns</h1>
-                        <p className="text-gray-800 font-normal text-lg">Time: 14:00-15:30</p>
-                        <p className="text-gray-800 font-normal text-lg">Type: <span className="font-semibold">Group Class</span></p>
-                     </div>
-
-                     <div className="bg-white px-5 text-center w-fit rounded-lg shadow-sm py-5 hover:shadow-lg hover:scale-[1.02] transition-all cursor-pointer">
-                        <h2 className="text-gray-800 font-semibold text-sm p-1">Oct 21 - Oct 27</h2>
-                        <h1 className="text-gray-800 font-semibold text-lg">Advanced React Patterns</h1>
-                        <p className="text-gray-800 font-normal text-lg">Time: 14:00-15:30</p>
-                        <p className="text-gray-800 font-normal text-lg">Type: <span className="font-semibold">Group Class</span></p>
-                     </div>
-
-                </div>
-                
             </div>
         </>
     );
