@@ -25,6 +25,7 @@ import Settings from './Pages/dashboard/student/Settings';
 import Support from './Pages/dashboard/student/Support';
 import SchedulePage from './Pages/dashboard/tutor/SchedulePage ';
 import LiveSessionPage from './Pages/dashboard/tutor/LiveSessionPage';
+import StudentDirectory from './Pages/dashboard/tutor/StudentDirectory';
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
         <Route path="/student/Support" element={<Support />} />
         <Route path="/tutor/SchedulePage" element={<SchedulePage />} />
         <Route path="/tutor/LiveSessionPage" element={<LiveSessionPage />} />
+        <Route path="/tutor/StudentDirectory" element={<StudentDirectory />} />
 
       
         

@@ -1,4 +1,5 @@
 
+
 import { 
   Video, 
   Play, 
@@ -19,6 +20,9 @@ import TutorNavbar from "../../../Components/TutorNavbar";
 import { Link } from "react-router-dom";
 
 export default function TutorDashboard() {
+
+  
+
   const todayClasses = [
     { id: 1, title: 'Advanced React Patterns', subject: 'Frontend Dev', time: '14:00 - 15:30', students: 24, status: 'Live' },
     { id: 2, title: 'Introduction to UI/UX', subject: 'Design', time: '16:00 - 17:00', students: 12, status: 'Upcoming' },
@@ -71,8 +75,20 @@ export default function TutorDashboard() {
                 <ArrowUpRight size={14} /> 12%
               </div>
             </div>
+            
             <h3 className="text-2xl font-bold text-gray-900">1,284</h3>
-            <p className="text-sm text-gray-500 mt-1">Active Students</p>
+
+            <div className='flex items-center justify-between '>
+              <div>
+                <p className="text-sm text-gray-500 mt-1">Active Students</p>
+              </div>
+              <div>
+                <Link 
+                  to ="/tutor/StudentDirectory"
+                  className='bg-blue-600 text-white px-2 rounded-sm cursor-pointer'>View</Link>
+              </div>
+            </div>
+            
           </div>
 
           {/* Card 4: Pending Actions */}
