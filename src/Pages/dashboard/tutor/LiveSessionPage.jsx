@@ -1,124 +1,85 @@
 
-import {Menu} from 'lucide-react';
-
 import { useState } from "react";
+
+const students = [
+    {id:1, name:"John kim", muted:false},
+    {id:2, name:"Aisha kim", muted:true},
+    {id:3, name:"David kim", muted:false},
+];
 
 export default function LiveSessionPage(){
 
-    const [sidebarOpen, setSidebarOpen] = useState(true);
-    const [activeTab, setActiveTab] = useState("chtat");
-
     const [messages, setMessage] = useState([
-        {sender: "Tutor", text: "Welcome everyone"},
-        {sender: "Student A", text: "Hello "}
+        {sender: "System", text: "Class started"},
+        {sender: "Aisha", text: "Good Afternoon "}
     ]);
-
-    const [participants, setParticipants] = useState([
-        {id: 1, name: "Julius (Tutor)", muted:false},
-        {id: 2, name: "Student A", muted:true},
-        {id: 3, name: "Student B", muted:false}
-    ]);
-
-    const [newMessage, setNewMessage] = useState("");
+    const [input,setInput] = useState("");
 
     const sendMessage = () => {
-        if (!newMessage.trim()) return;
-        setMessage([...messages, {sender: "You", text: newMessage}]);
-        setNewMessage("");
+        if (!input.trim()) return;
+        setMessage([...messages, {sender: "tutor", text: input}]);
+        setInput("");
     };
 
-    const toggleMute = (id) => {
-        setParticipants(
-            participants.map(p =>
-                p.id === id ? {...p, muted: !p.muted } : p
-            )
-        );
-    };
 
     return(
         <>
-            <div>
-                <div className="flex items-center  justify-between bg-white shadow-sm py-5 px-5">
-                    <h1 className="text-lg cursor-pointer font-medium text-blue-600">Back to Dashboard</h1>
-                    <button className="cursor-pointer inline-block px-4 py-2 text-sm bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition font-semibold">+ Add Session</button>
-                </div>
-            </div>
-
-            <div className="flex h-screen bg-gray-100">
-                <div className="flex-1 flex flex-col">
-                    <div className="bg-black flex-1 flex items-center justify-center text-white text-2xl">
-                        Video Session Area
-                    </div>
-
-                    <div className="p-2 bg-gray-900 text-white flex justify-center">
-                        <button
-                            onClick={() => setSidebarOpen(!sidebarOpen)}
-                            className="bg-blue-600 px-4 py-2 rounded"
-                        >
-                            <Menu/>
-                        </button>
-                    </div>
+            <div className="h-screen flex flex-col">
+                {/*Top Bar*/}
+                <div className="bg-white shadow p-4 flex justify-between items-center">
+                    <h2 className='text-xl font-semibold'>Physics - Motion</h2>
+                    <p className='text-gray-500 text-sm'>Live Sessions</p>
                 </div>
 
-                <div className={`w-80 bg-white border-1 shadow-lg transition-transform duration-300
-                    ${sidebarOpen ? "translate-x-0" : "translate-x-full"}`}>
+                <button className='px-4 py-2 bg-red-600 text-white rounded-lg'> 
+                    End Session
+                </button>
 
-                        <div className='flex border-b'>
-                            <button
-                                onClick={() => setActiveTab("chat")}
-                                className={`flex-1 p-3 ${activeTab === "chat" ? "bg-blue-100 font-bold" : ""}`} 
-                            >People</button>
+                <div className='flex flex-1 overflow-hidden'>
+                    {/*Video Area*/}
+                    <div className='flex-1 bg-black text-white flex items-center justify-center text-xl'>
+                        Video Stream Area (Jitsi will go here)
+                    </div>
+
+                    {/*Right Panel*/}
+                    <div className='w-80 border-1 bg-white flex flex-col'>
+                        {/*Participants*/}
+                        <div className='p-4 border-b'>
+                            <h3 className='font-semibold mb-2'>Students</h3>
+                            {students.map((s) => (
+                                <div key={s.id} className='flex justify-between text-sm mb-2'>
+                                    <span>{s.name}</span>
+                                    <span className={s.muted ? 'text-red-500' : "text-green-600"}>{s.muted ? "Muted" : "Speaking"}</span>
+                                </div>
+                            ))}
                         </div>
 
-                        <div className='h-full flex flex-col'>
-                            {activeTab === "chat" && (
-                                <>
-                                <div className="flex-1 p-4 overflow-y-auto">
-                                    {messages.map((msg, index) => (
-                                        <div key={index} className='mb-2'>
-                                            <span className='font-semibold'>{msg.sender}:</span>{""}
-                                            {msg.text}
-                                        </div>
-                                    ))}
+                        {/*Chat*/}
+                        <div className='flex-1 p-4 overflow-y-auto'>
+                            {messages.map((m, i) => (
+                                <div key={i} className='mb-2 text-sm'>
+                                    <strong>{m.sender}:</strong> {m.text}
                                 </div>
-
-                                <div className="p-3 border-t flex">
-                                    <input 
-                                        value={newMessage}
-                                        onChange={(e) => setNewMessage(e.target.value)}
-                                        className="flex-1 border p-2 rounded"
-                                        placeholder="Type a message"
-                                    />
-                                    <button
-                                        onClick={sendMessage}
-                                        className='ml-2 bg-blue-600 text-white px-4 rounded'
-                                    >Send 
-                                    </button>
-                                </div>
-                                </>
-                            )}
-
-                        {activeTab === "people" && (
-                            <div className="p-4 space-y-3">
-                                {participants.map( p => (
-                                    <div
-                                        key={p.id}
-                                        className="flex justify-between items-center border p-2 rounded"
-                                    >
-                                    <span>{p.name}</span>
-                                    <button
-                                        onClick={() => toggleMute(p.id)}
-                                        className={`px-3 py-1 rounded text-white ${
-                                            p.muted ? "bg-red-600" : "bg-green-600"
-                                        }`}
-                                    >
-                                        {p.muuted ? "Muted" : "Unmuted"}
-                                    </button>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
+                            ))}
                         </div>
+
+                        {/*Imput*/}
+                        <div className='p-3 border-t flex gap-2'>
+                            <input 
+                                value={input}
+                                onChange={(e) => setInput(e.target.value)}
+                                className='flex-1 border rounded-lg px-3 py-2 text-sm'
+                                placeholder='Type message....'
+                             />
+                             
+                             <button
+                                onClick={sendMessage}
+                                className='bg-blue-600 text-white px-4 rounded-lg' 
+                             >
+                                Send
+                             </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
