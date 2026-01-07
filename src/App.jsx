@@ -27,7 +27,7 @@ import SchedulePage from './Pages/dashboard/tutor/SchedulePage ';
 import LiveSessionPage from './Pages/dashboard/tutor/LiveSessionPage';
 import StudentDirectory from './Pages/dashboard/tutor/StudentDirectory';
 import AssignmentPage from './Pages/dashboard/tutor/AssignmentPage';
-
+import ClassDetailsPage from './Pages/dashboard/tutor/ClassDetailsPage';
 
 function App() {
 
@@ -71,7 +71,7 @@ function App() {
         <Route path="/tutor/LiveSessionPage" element={<LiveSessionPage />} />
         <Route path="/tutor/StudentDirectory" element={<StudentDirectory />} />
         <Route path="/tutor/AssignmentPage" element={<AssignmentPage />} />
-      
+        <Route path="/tutor/ClassDetailsPage" element={<ClassDetailsPage />} />      
         
 
       </Routes>

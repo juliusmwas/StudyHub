@@ -129,7 +129,9 @@ export default function TutorDashboard() {
                 </Link>
             </div>
             
-            <div className="space-y-4">
+            <Link
+                to="/tutor/ClassDetailsPage"
+             className="space-y-4">
               {todayClasses.map((item) => (
                 <div key={item.id} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between group hover:border-blue-200 transition-all">
                   <div className="flex items-center gap-4">
@@ -156,7 +158,7 @@ export default function TutorDashboard() {
                   </div>
                 </div>
               ))}
-            </div>
+            </Link>
 
             {/* 4️⃣ Class Performance Snapshot */}
             <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
