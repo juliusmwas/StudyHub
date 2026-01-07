@@ -98,8 +98,20 @@ export default function TutorDashboard() {
                 <AlertCircle size={20} />
               </div>
             </div>
+
             <h3 className="text-2xl font-bold text-gray-900">7 Tasks</h3>
-            <p className="text-sm text-gray-500 mt-1">Assignments to review</p>
+            
+            <div className='flex items-center justify-between '>
+              <div>
+                <p className="text-sm text-gray-500 mt-1">Assignments to review</p>
+              </div>
+              <div>
+                <Link 
+                  to ="/tutor/AssignmentPage"
+                  className='bg-blue-600 text-white px-2 rounded-sm cursor-pointer'>View</Link>
+              </div>
+            </div>
+  
           </div>
         </div>
 
