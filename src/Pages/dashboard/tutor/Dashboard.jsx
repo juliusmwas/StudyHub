@@ -147,7 +147,8 @@ export default function TutorDashboard() {
                     </div>
                   </div>
                   
-                  <div>
+                  <Link 
+                      to="/tutor/SessionSummary">
                     {item.status === 'Live' ? (
                       <button className="bg-red-50 text-red-600 px-4 py-2 rounded-lg text-sm font-bold hover:bg-red-100">Resume</button>
                     ) : item.status === 'Upcoming' ? (
@@ -155,7 +156,7 @@ export default function TutorDashboard() {
                     ) : (
                       <button className="text-gray-400 px-4 py-2 text-sm font-medium flex items-center gap-1">Summary <ChevronRight size={16}/></button>
                     )}
-                  </div>
+                  </Link>
                 </div>
               ))}
             </Link>
