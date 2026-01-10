@@ -1,6 +1,6 @@
 import './index.css';
 import Homepage from "./Pages/Homepage";
-import AuthPage from "./Pages/AuthPage"; // Make sure to create this page
+import AuthPage from "./Pages/AuthPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -29,14 +29,15 @@ import StudentDirectory from './Pages/dashboard/tutor/StudentDirectory';
 import AssignmentPage from './Pages/dashboard/tutor/AssignmentPage';
 import ClassDetailsPage from './Pages/dashboard/tutor/ClassDetailsPage';
 import SessionSummary from './Pages/dashboard/tutor/SessionSummary';
+import ResourcesLibrary from './Pages/dashboard/tutor/ResourcesLibrary';
 
 function App() {
 
   useEffect(() => {
     AOS.init({
-      duration: 800, // smooth speed
-      offset: 100,   // triggers earlier
-      once: false,   // animate only once per scroll
+      duration: 800,
+      offset: 100,
+      once: false,
     });
   }, []);
 
@@ -46,12 +47,11 @@ function App() {
         {/* Homepage */}
         <Route path="/" element={<Homepage />} />
 
-        {/* AuthPage for login/sign-up */}
+        {/* AuthPage */}
         <Route path="/auth" element={<AuthPage />} />
 
-        {/* Future Dashboard Routes */}
+        {/* Student Dashboard */}
         <Route path="/student/dashboard" element={<StudentDashboard />} />
-        <Route path="/tutor/dashboard" element={<TutorDashboard />} />
         <Route path="/student/lessons/continue" element={<ContinueLesson />}/>
         <Route path="/student/schedule" element={<StudentSchedule />}/>
         <Route path="/student/messages" element={<StudentMessages />}/>
@@ -68,14 +68,24 @@ function App() {
         <Route path="/student/Profile" element={<Profile />} />
         <Route path="/student/Settings" element={<Settings />} />
         <Route path="/student/Support" element={<Support />} />
+
+        {/* Tutor existing routes (unchanged) */}
+        <Route path="/tutor/dashboard" element={<TutorDashboard />} />
         <Route path="/tutor/SchedulePage" element={<SchedulePage />} />
         <Route path="/tutor/LiveSessionPage" element={<LiveSessionPage />} />
         <Route path="/tutor/StudentDirectory" element={<StudentDirectory />} />
         <Route path="/tutor/AssignmentPage" element={<AssignmentPage />} />
         <Route path="/tutor/ClassDetailsPage" element={<ClassDetailsPage />} />
-        <Route path="/tutor/SessionSummary" element={<SessionSummary />} />     
-        
+        <Route path="/tutor/SessionSummary" element={<SessionSummary />} />
+        <Route path="/tutor/ResourcesLibrary" element={<ResourcesLibrary />} />
 
+        {/* 🔥 Navbar friendly routes (aliases for Tutor dashboard) */}
+        <Route path="/dashboard" element={<TutorDashboard />} />
+        <Route path="/classes" element={<ClassDetailsPage />} />
+        <Route path="/schedule" element={<SchedulePage />} />
+        <Route path="/students" element={<StudentDirectory />} />
+        <Route path="/resources" element={<ResourcesLibrary />} />
+        <Route path="/messages" element={<LiveSessionPage />} />
       </Routes>
     </Router>
   );
