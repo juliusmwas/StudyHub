@@ -207,12 +207,16 @@ export default function TutorDashboard() {
             <section>
               <h2 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Quick Actions</h2>
               <div className="grid grid-cols-2 gap-3">
-                <button className="flex flex-col items-center justify-center p-4 bg-white border border-gray-100 rounded-xl hover:shadow-md transition-shadow gap-2 group">
-                  <div className="p-2 bg-blue-50 text-blue-600 rounded-full group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                    <Plus size={20} />
-                  </div>
-                  <span className="text-xs font-bold text-gray-700">New Class</span>
-                </button>
+                <Link
+                   to="/tutor/CreateClassPage">
+                  <button className="flex flex-col items-center justify-center p-4 bg-white border border-gray-100 rounded-xl hover:shadow-md transition-shadow gap-2 group cursor-pointer">
+                    <div className="p-2 bg-blue-50 text-blue-600 rounded-full group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                      <Plus size={20} />
+                    </div>
+                    <span className="text-xs font-bold text-gray-700">New Class</span>
+                  </button>
+                </Link>
+
                 <button className="flex flex-col items-center justify-center p-4 bg-white border border-gray-100 rounded-xl hover:shadow-md transition-shadow gap-2 group">
                   <div className="p-2 bg-purple-50 text-purple-600 rounded-full group-hover:bg-purple-600 group-hover:text-white transition-colors">
                     <Upload size={20} />
