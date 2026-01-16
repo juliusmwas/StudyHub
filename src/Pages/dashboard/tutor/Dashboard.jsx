@@ -162,7 +162,9 @@ export default function TutorDashboard() {
             </Link>
 
             {/* 4️⃣ Class Performance Snapshot */}
-            <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+            <Link 
+                to="/tutor/AnalyticsPage">
+              <div className="bg-white mt-3 p-6 rounded-xl border border-gray-100 shadow-sm">
               <h3 className="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <TrendingUp size={20} className="text-blue-600"/> Performance Snapshot
               </h3>
@@ -195,7 +197,8 @@ export default function TutorDashboard() {
                   </div>
                 </div>
               </div>
-            </div>
+              </div>
+            </Link>
           </div>
 
           {/* Right Column: Quick Actions & Feed */}

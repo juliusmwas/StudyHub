@@ -30,6 +30,7 @@ import AssignmentPage from './Pages/dashboard/tutor/AssignmentPage';
 import ClassDetailsPage from './Pages/dashboard/tutor/ClassDetailsPage';
 import SessionSummary from './Pages/dashboard/tutor/SessionSummary';
 import ResourcesLibrary from './Pages/dashboard/tutor/ResourcesLibrary';
+import AnalyticsPage from './Pages/dashboard/tutor/AnalyticsPage';
 
 function App() {
 
@@ -78,6 +79,7 @@ function App() {
         <Route path="/tutor/ClassDetailsPage" element={<ClassDetailsPage />} />
         <Route path="/tutor/SessionSummary" element={<SessionSummary />} />
         <Route path="/tutor/ResourcesLibrary" element={<ResourcesLibrary />} />
+        <Route path="/tutor/AnalyticsPage" element={<AnalyticsPage />} />
 
         {/* 🔥 Navbar friendly routes (aliases for Tutor dashboard) */}
         <Route path="/dashboard" element={<TutorDashboard />} />
