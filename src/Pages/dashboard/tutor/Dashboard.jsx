@@ -223,23 +223,26 @@ export default function TutorDashboard() {
             </section>
 
             {/* 5️⃣ Recent Activity Feed */}
-            <section className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-              <h2 className="text-lg font-bold text-gray-900 mb-4">Recent Activity</h2>
-              <div className="space-y-5">
-                {[
-                  { user: 'Jane Doe', action: 'submitted Assignment 2', icon: <CheckCircle2 size={14}/>, color: 'text-green-600' },
-                  { user: 'Mark Smith', action: 'enrolled in Java Basics', icon: <Users size={14}/>, color: 'text-blue-600' },
-                  { user: 'New Message', action: 'from Sarah Jenkins', icon: <MessageSquare size={14}/>, color: 'text-purple-600' },
-                ].map((item, idx) => (
-                  <div key={idx} className="flex gap-3">
-                    <div className={`mt-1 ${item.color}`}>{item.icon}</div>
-                    <p className="text-sm text-gray-600">
-                      <span className="font-bold text-gray-900">{item.user}</span> {item.action}
-                    </p>
+            <Link 
+              to="/tutor/ActivityLog">
+                <section className="bg-white p-6 mb-3 rounded-xl border border-gray-100 shadow-sm">
+                  <h2 className="text-lg font-bold text-gray-900 mb-4">Recent Activity</h2>
+                  <div className="space-y-5">
+                    {[
+                      { user: 'Jane Doe', action: 'submitted Assignment 2', icon: <CheckCircle2 size={14}/>, color: 'text-green-600' },
+                      { user: 'Mark Smith', action: 'enrolled in Java Basics', icon: <Users size={14}/>, color: 'text-blue-600' },
+                      { user: 'New Message', action: 'from Sarah Jenkins', icon: <MessageSquare size={14}/>, color: 'text-purple-600' },
+                    ].map((item, idx) => (
+                      <div key={idx} className="flex gap-3">
+                        <div className={`mt-1 ${item.color}`}>{item.icon}</div>
+                        <p className="text-sm text-gray-600">
+                          <span className="font-bold text-gray-900">{item.user}</span> {item.action}
+                        </p>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </section>
+                </section>
+            </Link>    
 
             {/* 6️⃣ Teaching Tip Card */}
             <div className="bg-gradient-to-br from-indigo-500 to-purple-600 p-6 rounded-xl text-white">
