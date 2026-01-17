@@ -1,11 +1,9 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateClassPage() {
   const navigate = useNavigate();
 
-  // Form state
   const [name, setName] = useState("");
   const [subject, setSubject] = useState("");
   const [level, setLevel] = useState("");
@@ -13,26 +11,37 @@ export default function CreateClassPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
 
-    // Simple validation
     if (!name || !subject || !level) {
       setError("Please fill in all required fields.");
+      return;
+    }
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      setError("You must be logged in to create a class.");
       return;
     }
 
     setLoading(true);
 
     try {
-      // API call placeholder
-      // Replace URL with your backend endpoint later
-      const res = await fetch("/api/classes", {
+      const res = await fetch("http://localhost:5000/api/classes", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, subject, level, description }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name,
+          subject,
+          level,
+          description,
+        }),
       });
 
       const data = await res.json();
@@ -43,11 +52,11 @@ export default function CreateClassPage() {
         return;
       }
 
-      // Success: redirect to class details
+      // ✅ Success
       navigate(`/tutor/classes/${data._id}`);
     } catch (err) {
-      setError("Server error. Please try again.");
-      console.error(err);
+      console.error("Create class error:", err);
+      setError("Cannot connect to server. Is backend running?");
     } finally {
       setLoading(false);
     }
@@ -56,10 +65,11 @@ export default function CreateClassPage() {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="w-full max-w-3xl bg-white rounded-2xl shadow-lg p-8 md:p-12">
+        
         {/* Back Button */}
         <button
-          onClick={() => navigate("/tutor/dashboard")}
-          className="text-sm text-blue-600 hover:underline mb-4"
+          onClick={() => navigate("/dashboard/tutor")}
+          className="text-sm text-blue-600 hover:underline mb-6"
         >
           ← Back to Dashboard
         </button>
@@ -69,84 +79,67 @@ export default function CreateClassPage() {
           Create New Class
         </h1>
         <p className="text-gray-500 mb-6">
-          Fill in the details below to create a new class for your students.
+          Fill in the details below to create a new class.
         </p>
 
-        {/* Error Message */}
+        {/* Error */}
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-5">
             {error}
           </div>
         )}
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Class Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Class Name *
-            </label>
+            <label className="block text-sm font-medium mb-1">Class Name *</label>
             <input
-              type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              className="w-full px-4 py-2 border rounded-lg"
               placeholder="Form 3 Mathematics"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-              required
             />
           </div>
 
-          {/* Subject */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Subject *
-            </label>
+            <label className="block text-sm font-medium mb-1">Subject *</label>
             <input
-              type="text"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
+              className="w-full px-4 py-2 border rounded-lg"
               placeholder="Mathematics"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-              required
             />
           </div>
 
-          {/* Level / Grade */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium mb-1">
               Level / Grade *
             </label>
             <input
-              type="text"
               value={level}
               onChange={(e) => setLevel(e.target.value)}
+              className="w-full px-4 py-2 border rounded-lg"
               placeholder="Form 3"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-              required
             />
           </div>
 
-          {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium mb-1">
               Description
             </label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Briefly describe the class (optional)"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 resize-none"
               rows={3}
+              className="w-full px-4 py-2 border rounded-lg resize-none"
             />
           </div>
 
-          {/* Submit Button */}
           <button
-            type="submit"
             disabled={loading}
-            className={`w-full py-3 rounded-lg text-white font-semibold transition ${
+            className={`w-full py-3 rounded-lg text-white font-semibold ${
               loading
-                ? "bg-gray-400 cursor-not-allowed"
+                ? "bg-gray-400"
                 : "bg-indigo-600 hover:bg-indigo-700"
             }`}
           >

@@ -3,29 +3,37 @@ const User = require("../models/User");
 const Session = require("../models/Session");
 
 // ------------------- CREATE CLASS -------------------
+// ------------------- CREATE CLASS -------------------
 exports.createClass = async (req, res) => {
   try {
     const { name, subject, level, description } = req.body;
 
-    if (!name || !subject) {
-      return res.status(400).json({ msg: "Name and subject are required" });
+    // Validate required fields
+    if (!name || !subject || !level) {
+      return res.status(400).json({ msg: "Name, subject and level are required" });
     }
 
+    // Create new class
     const newClass = new Class({
       name,
       subject,
       level,
-      description,
+      description: description || "", // default empty string
       tutor: req.user.id, // from JWT middleware
+      students: [],       // initialize empty array
+      sessions: [],       // initialize empty array
     });
 
     const savedClass = await newClass.save();
+
+    // Return saved class
     res.status(201).json(savedClass);
   } catch (err) {
     console.error("Error creating class:", err);
     res.status(500).json({ msg: "Server error" });
   }
 };
+
 
 // ------------------- GET CLASS DETAILS -------------------
 exports.getClassDetails = async (req, res) => {

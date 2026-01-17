@@ -4,17 +4,17 @@ const {
   getClassDetails,
   getClassStudents,
   getClassSessions,
-  createClass, // new
+  createClass,
 } = require("../controllers/class.controller");
 
-const { verifyToken } = require("../middleware/authMiddleware"); // JWT auth for tutors
+const { verifyToken } = require("../middleware/authMiddleware");
 
-// --- Class creation (POST)
+// POST - create class (protected)
 router.post("/", verifyToken, createClass);
 
-// --- Existing GET routes
-router.get("/:id", getClassDetails);
-router.get("/:id/students", getClassStudents);
-router.get("/:id/sessions", getClassSessions);
+// GET routes
+router.get("/:id", verifyToken, getClassDetails);
+router.get("/:id/students", verifyToken, getClassStudents);
+router.get("/:id/sessions", verifyToken, getClassSessions);
 
 module.exports = router;
