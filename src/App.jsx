@@ -78,7 +78,7 @@ function App() {
         <Route path="/tutor/LiveSessionPage" element={<LiveSessionPage />} />
         <Route path="/tutor/StudentDirectory" element={<StudentDirectory />} />
         <Route path="/tutor/AssignmentPage" element={<AssignmentPage />} />
-        <Route path="/tutor/ClassDetailsPage" element={<ClassDetailsPage />} />
+        <Route path="/tutor/classes/:id" element={<ClassDetailsPage />} />
         <Route path="/tutor/SessionSummary" element={<SessionSummary />} />
         <Route path="/tutor/ResourcesLibrary" element={<ResourcesLibrary />} />
         <Route path="/tutor/AnalyticsPage" element={<AnalyticsPage />} />

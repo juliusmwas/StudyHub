@@ -3,27 +3,43 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const ClassDetailsPage = () => {
   const navigate = useNavigate();
-  const { classId } = useParams(); // classId from route
+  const { id } = useParams();
 
   const [classInfo, setClassInfo] = useState(null);
   const [students, setStudents] = useState([]);
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchClassData = async () => {
       try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          setError("Not authenticated");
+          return;
+        }
+
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+
         const [classRes, studentsRes, sessionsRes] = await Promise.all([
-          fetch(`/api/classes/${classId}`),
-          fetch(`/api/classes/${classId}/students`),
-          fetch(`/api/classes/${classId}/sessions`),
+          fetch(`/api/classes/${id}`, { headers }),
+          fetch(`/api/classes/${id}/students`, { headers }),
+          fetch(`/api/classes/${id}/sessions`, { headers }),
         ]);
+
+        if (!classRes.ok) throw new Error("Failed to fetch class");
+        if (!studentsRes.ok) throw new Error("Failed to fetch students");
+        if (!sessionsRes.ok) throw new Error("Failed to fetch sessions");
 
         const classData = await classRes.json();
         const studentsData = await studentsRes.json();
         const sessionsData = await sessionsRes.json();
 
-        // Calculate derived stats
+        // ---- Derived stats ----
         const avgProgress =
           studentsData.length > 0
             ? Math.round(
@@ -41,30 +57,34 @@ const ClassDetailsPage = () => {
             : 0;
 
         const atRiskCount = studentsData.filter(
-          (s) => s.progress < 50 || s.attendance < 70
+          (s) => (s.progress || 0) < 50 || (s.attendance || 0) < 70
         ).length;
 
         setClassInfo({
           name: classData.name,
+          subject: classData.subject,
+          level: classData.level,
           totalStudents: studentsData.length,
           avgProgress,
           avgAttendance,
-          activeAssignments: 0, // can be wired later
+          activeAssignments: classData.activeAssignments || 0,
           atRisk: atRiskCount,
         });
 
         setStudents(studentsData);
         setSessions(sessionsData);
-
-      } catch (error) {
-        console.error("Failed to load class data:", error);
+      } catch (err) {
+        console.error(err);
+        setError("Unable to load class details");
       } finally {
         setLoading(false);
       }
     };
 
     fetchClassData();
-  }, [classId]);
+  }, [id]);
+
+  // ---------------- UI STATES ----------------
 
   if (loading) {
     return (
@@ -74,27 +94,27 @@ const ClassDetailsPage = () => {
     );
   }
 
-  if (!classInfo) {
-  return (
-    <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4 text-center">
-      <p className="text-gray-500 text-lg">
-        No class details available.
-      </p>
+  if (error || !classInfo) {
+    return (
+      <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4 text-center">
+        <p className="text-gray-500 text-lg">
+          {error || "No class details available."}
+        </p>
 
-      <button
-        onClick={() => navigate("/tutor/dashboard")}
-        className="px-5 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition"
-      >
-        ← Back to Dashboard
-      </button>
-    </div>
-  );
-}
+        <button
+          onClick={() => navigate("/tutor/dashboard")}
+          className="px-5 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition"
+        >
+          ← Back to Dashboard
+        </button>
+      </div>
+    );
+  }
 
+  // ---------------- MAIN UI ----------------
 
   return (
     <div className="p-4 md:p-6 space-y-8 max-w-7xl mx-auto">
-
       {/* Back Button */}
       <button
         onClick={() => navigate("/tutor/dashboard")}
@@ -107,7 +127,7 @@ const ClassDetailsPage = () => {
       <div className="bg-white rounded-2xl p-6 shadow-sm">
         <h1 className="text-2xl font-bold">{classInfo.name}</h1>
         <p className="text-gray-500 mt-1">
-          {classInfo.totalStudents} students · Average progress {classInfo.avgProgress}%
+          {classInfo.level} · {classInfo.subject}
         </p>
       </div>
 
@@ -128,7 +148,8 @@ const ClassDetailsPage = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {students.map((s) => {
-              const atRisk = s.progress < 50 || s.attendance < 70;
+              const atRisk =
+                (s.progress || 0) < 50 || (s.attendance || 0) < 70;
 
               return (
                 <div
@@ -136,9 +157,10 @@ const ClassDetailsPage = () => {
                   className="bg-white p-5 rounded-xl shadow-sm flex justify-between items-center"
                 >
                   <div>
-                    <p className="font-semibold">{s.name}</p>
+                    <p className="font-semibold">{s.fullName}</p>
                     <p className="text-sm text-gray-500">
-                      Progress {s.progress || 0}% · Attendance {s.attendance || 0}%
+                      Progress {s.progress || 0}% · Attendance{" "}
+                      {s.attendance || 0}%
                     </p>
                   </div>
 

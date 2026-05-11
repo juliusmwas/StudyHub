@@ -68,7 +68,7 @@ export default function CreateClassPage() {
         
         {/* Back Button */}
         <button
-          onClick={() => navigate("/dashboard/tutor")}
+          onClick={() => navigate("/tutor/dashboard")}
           className="text-sm text-blue-600 hover:underline mb-6"
         >
           ← Back to Dashboard
